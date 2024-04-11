@@ -80,7 +80,7 @@ function findAndPrint(messages, currentStation) {
       nearest = [friend];
       nearestDistance = distance;
     } else if (distance === nearestDistance) {
-      nearest.push(friend); // 如果與最小距離一樣，則增加朋友至陣列
+      nearest.push(friend); // 如果有人距離與最小距離一樣，則增加朋友至陣列
     }
   });
 
@@ -127,7 +127,7 @@ function book(consultants, hour, duration, criteria) {
       return !(hour < schedule.endTime && bookEndTime > schedule.startTime);
     });
 
-    //如果有空，就將預約時間加進時間表
+    //如果有空，就將諮詢師加入陣列
     if (isAvailable) {
       availableConsultants.push(consultant);
     }
@@ -147,7 +147,8 @@ function book(consultants, hour, duration, criteria) {
       selectedConsultant = availableConsultants[0];
     }
 
-    //更新被選中的顧問的時間表
+    //在被選中的顧問加入預約時間
+    //(因為這些資料都是指向原陣列的參考，更新後原本的時間表也會更新)
     selectedConsultant["schedules"].push({
       startTime: hour,
       endTime: hour + duration,
@@ -179,7 +180,7 @@ console.log("==============");
 //   }
 // }
 //2.Loop傳進來的資料，根據不同長度名字的情況，將中間名存進Obj
-//3.檢查中間名的字有沒有在Obj裡，有就把counter+1，並把名字push進陣列
+//3.檢查中間名有沒有在Obj裡，有就把counter+1，並把名字push進陣列
 //4.如果沒有就建立新的Key: Value
 //5.Loop Obj，回傳counter只有1的名字，如果沒有就回傳“沒有”
 
@@ -198,7 +199,6 @@ function checkNameCount(obj) {
 
 function func(...data) {
   const middleCount = {};
-  let middleName;
 
   //根據名字長度不同找出middleName
   for (let name of data) {
@@ -254,3 +254,41 @@ getNumber(1); // print 4
 getNumber(5); // print 15
 getNumber(10); // print 25
 getNumber(30); // print 70
+
+console.log("==============");
+
+// ====================Task 5====================
+// 比較兩個車廂陣列，將可載客且座位數大於乘客數的車廂連同index資料以Obj方式存進陣列
+// 如果沒有符合條件的車廂，回傳-1
+// 將符合條件的車廂資料與乘客數n比較，找出座位與乘客數最接近的車廂，回傳車廂index
+
+function find(spaces, stat, n) {
+  //先把可載客的車廂篩出來
+  //將車廂索引及車廂座位以字典方式存進陣列
+  const freeSeats = [];
+  for (let i = 0; i < spaces.length; i++) {
+    if (stat[i] === 1 && spaces[i] >= n) {
+      freeSeats.push({ index: i, seat: spaces[i] });
+    }
+  }
+
+  //如果沒有可載客車廂，回傳-1
+  let bestFit;
+  if (freeSeats.length === 0) {
+    return -1;
+  } else {
+    //在可載客的選項中找出座位與乘客數量最接近的車廂，回傳車廂index
+    bestFit = freeSeats.reduce(function (prev, curr) {
+      if (Math.abs(curr.seat - n) < Math.abs(prev.seat - n)) {
+        return curr;
+      } else {
+        return prev;
+      }
+    });
+  }
+  return bestFit.index;
+}
+
+console.log(find([3, 1, 5, 4, 3, 2], [0, 1, 0, 1, 1, 1], 2)); // print 5
+console.log(find([1, 0, 5, 1, 3], [0, 1, 0, 1, 1], 4)); // print -1
+console.log(find([4, 6, 5, 8], [0, 1, 1, 1], 4)); // print 2

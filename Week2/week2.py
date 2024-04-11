@@ -255,3 +255,34 @@ get_number(1)   # print 4
 get_number(5)   # print 15
 get_number(10)  # print 25
 get_number(30)  # print 70
+
+print("=============")
+
+# ==================== Task 5 ====================
+# 比較兩個車廂陣列，篩出可載客以及座位數量 >= 乘客數的車廂
+# 將可載客車廂連同index資料以字典方式存進可用空位車廂陣列
+# 如果沒有可用空位車廂，回傳-1
+# 將可用空位車廂資料與乘客數n比較，找出座位與乘客數最接近的車廂，回傳車廂index
+
+
+def find(spaces, stat, n):
+    free_seats = []
+    # 檢查spaces的索引及值
+    # 條件：可載客車廂篩出來，座位數量比乘客多
+    # 將符合條件的車廂索引及座位數量以字典方式存進陣列
+    for i, seat in enumerate(spaces, 0):
+        if stat[i] == 1 and seat >= n:
+            free_seats.append({"index": i, "seat": seat})
+
+    # 若沒有可用車廂，回傳-1
+    # 找出座位跟乘客數量最接近的車廂，回傳index
+    if len(free_seats) == 0:
+        print(-1)
+    else:
+        best_fit = min(free_seats, key=lambda x: x["seat"] - n)
+        print(best_fit["index"])
+
+
+find([3, 1, 5, 4, 3, 2], [0, 1, 0, 1, 1, 1], 2)  # print 5
+find([1, 0, 5, 1, 3], [0, 1, 0, 1, 1], 4)  # print -1
+find([4, 6, 5, 8], [0, 1, 1, 1], 4)  # print 2
