@@ -6,3 +6,5 @@ hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("open");
   mobileNav.classList.toggle("open");
 });
+
+console.log(19 % 10);

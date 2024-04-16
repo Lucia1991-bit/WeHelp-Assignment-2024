@@ -56,6 +56,8 @@ function findAndPrint(messages, currentStation) {
   let nearestDistance;
 
   //處理message與currentStation
+  //Object.entries將messages變成[{Bob: "..."}, {Mary: "..."}]的陣列
+  //[friend, message]是解構語法，將該陣列每個元素的Key指定給friend，"..."訊息指定給message
   Object.entries(messages).forEach(([friend, message]) => {
     //與mrtStation比對，找出message中的車站名
     let friendLocation = mrtStations.find((station) =>
