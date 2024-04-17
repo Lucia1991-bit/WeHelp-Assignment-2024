@@ -85,7 +85,7 @@ main .container {
   display: grid;
   width: 1200px;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 50px repeat(2, 200px);
+  grid-template-rows: 50px auto; /* 高度部分剩下的資料必須自動 */
   gap: 20px;
 }
 
