@@ -130,7 +130,37 @@ main .container .title-item {
   border: #bcc1c4 0.5px solid;
   overflow: hidden;
   min-width: none;
-  min-height: 200px;
+  min-height: 200px; 
+}
+
+/* background loading animation */
+.title-item::after .animated-bg {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 10%,
+    #f6f7f8 20%,
+    #f6f7f8 100%
+  );
+  background-size: 200% 100%;
+  animation: bgPos 1s linear infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@keyframes bgPos {
+  0% {
+    background-position: 50% 0;
+  }
+
+  100% {
+    background-position: -150% 0;
+  }
 }
 
 div.title-item.item1,

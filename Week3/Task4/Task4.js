@@ -10,7 +10,6 @@ let totalItems = 0; // 總item數,初始為0,後續會根據獲取的資料進�
 
 //載入更多item
 async function loadMoreItmes() {
-
   //計算目前頁面item
   const startIndex = currentIndex;
   const endIndex = startIndex + addedItem;
@@ -98,7 +97,7 @@ function createTitleItem() {
   const titleEL = document.createElement("div");
   const starEL = document.createElement("i");
   const textEL = document.createElement("p");
-  titleEL.className = "title-item";
+  titleEL.className = "title-item animated-bg";
   starEL.className = "fa-solid fa-star";
   textEL.className = "text";
   titleEL.appendChild(starEL);
