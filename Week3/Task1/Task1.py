@@ -1,4 +1,3 @@
-
 import csv
 import json
 import urllib.request
@@ -113,12 +112,26 @@ def output_mrt_csv(spots, mrts):
         mrt_and_spots = group_spots_by_mrt(new_data)
 
         # 欄位名稱
-        fieldnames = ["捷運站", "景點"]
+        # 需將景點個別分開
+
+        # 找出最長的景點陣列
+        max_sopts = max(len(spot) for spot in mrt_and_spots.values())
+
+        # 欄位名稱
+        # ===已得知最長景點為個
+        chinese_num = ["一", "二", "三", "四", "五", "六"]
+
+        fieldnames = ["捷運站"] + [f"景点{chinese_num[i]}"
+                                for i in range(max_sopts)]
+
         # 分組好的捷運景點資料是字典，使用 csv.DictWriter寫入
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for mrt, spots in mrt_and_spots.items():
-            writer.writerow({'捷運站': mrt, '景點': ', '.join(spots)})
+            row = {'捷運站': mrt}
+            for i, spot in enumerate(spots):
+                row[f"景点{chinese_num[i]}"] = spot
+            writer.writerow(row)
 
 
 # # 將檔案輸出至spot.csvx
