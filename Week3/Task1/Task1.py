@@ -113,7 +113,7 @@ def output_mrt_csv(spots, mrts):
         max_sopts = max(len(spot) for spot in mrt_and_spots.values())
 
         # 欄位名稱
-        # ===已得知最長景點為個
+        # ===已得知最長景點為6個
         chinese_num = ["一", "二", "三", "四", "五", "六"]
 
         fieldnames = ["捷運站"] + [f"景点{chinese_num[i]}"
