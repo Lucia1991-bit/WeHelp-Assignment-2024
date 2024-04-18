@@ -3,104 +3,35 @@ const mobileNav = document.querySelector(".mobile-navbar");
 const cotentContainer = document.querySelector(".container");
 const loadMoreBtn = document.querySelector(".btn");
 
-const screenWidth = window.innerWidth; //螢幕縮放尺寸
-
-const initalItemCount = 13; //網頁初始item數量（promoItem 3 + titleItem 10）
-let currentIndex = 0;  //目前已載入的item數
-let addedItem = 10; //每次按load more時增加的item數量
-let totalItems = 0; // 總item數,初始為0,後續會根據獲取的資料進行更新
-
-
-
-//螢幕尺寸<1200px時，一次載入12個物件
-async function loadMoreInSmallScreen(startIndex, endIndex) {
-  
-  try {
-      //獲取data
-      const data = await fetchData(startIndex, endIndex);
-
-      if (data) {
-        //將item顯示於畫面
-        //重新計算目前畫面上顯示的item數量
-        displayItems(data);
-        currentIndex = endIndex;
-      
-        //如果顯示數量超過總資料量，Load More按鈕停止作用
-        if (currentIndex >= totalItems) {
-          loadMoreBtn.classList.add("disable");
-        }
-      }
-      
-    } catch (error) {
-      console.log(error);
-    }  
-}
-
-//載入更多item
-async function loadMoreItmes() {
-  //計算目前頁面item
-  let startIndex = currentIndex;
-  let endIndex = startIndex + addedItem;
-
-  if (screenWidth < 1200) {
-      loadMoreInSmallScreen(startIndex, endIndex + 2);
-  } else {
-      try {
-          //獲取data
-          const data = await fetchData(startIndex, endIndex);
-
-          if (data) {
-            //將item顯示於畫面
-            //重新計算目前畫面上顯示的item數量
-            displayItems(data);
-            currentIndex = endIndex;
-          
-            //如果顯示數量超過總資料量，Load More按鈕停止作用
-            if (currentIndex >= totalItems) {
-              loadMoreBtn.classList.add("disable");
-            }
-          }
-          
-        } catch (error) {
-          console.log(error);
-        }  
-  }
-}
+const screenWidth = window.innerWidth;
 
 //送出HTTP request取得資料
-async function fetchData(startIndex, endIndex) {
+let currentItem = 13;
+let spots = [];
+
+async function getData() {
   try {
     const response = await fetch("https://padax.github.io/taipei-day-trip-resources/taipei-attractions-assignment-1");
 
-    // 如果HTTP請求不成功(response.status不在200-299範圍),拋出錯誤
+    //如果HTTP請求不成功(response.status不在200-299範圍)，拋出錯誤
     if (!response.ok) {
-      throw new Error("Request failed");
+      throw new Error("Request Failed");
     }
 
     //把json資料轉換成物件
     //觀察資料後，找出需要的資料在["results"]這個key裡面
     const { data: { results } } = await response.json();
-    totalItems = results.length; // 更新總項目數
-    console.log(results);
-    
-    
-    // const spots = [];
-    // for (let i = startIndex; i < endIndex; i++) {
-    //   if (i >= totalItems) {
-    //     break;
-    //   } 
-    //   spots.push(results[i]);
-    // }
-    //控制要顯示的資料數量
-    return results.slice(startIndex, endIndex);
-
+    spots = results;
+    displayInitialData();
   } catch (error) {
     //顯示錯誤訊息
-      cotentContainer.textContent = "Request failed";
-      loadMoreBtn.classList.add("disable");
-      console.log(error);
+    cotentContainer.classList.add("error-message");
+    cotentContainer.textContent = error;
+    loadMoreBtn.classList.add("disable");
+    console.log(error);
   }
 }
+
 
 //處理filelist裡面的照片網址長字串
 //使用Regular Expressions匹配以http開頭 .jpg結尾(不分大小寫)的字
@@ -111,8 +42,24 @@ function getImageURL(spot) {
   return match[0];
 }
 
-//創建 Promotion Item
-function createPromoItem() {
+
+//生成初始畫面(前13筆資料)
+function displayInitialData() {
+  for (let i = 0; i < 13; i++) {
+    if (i >= spots.length) {
+      break;
+    }
+    displaySpotData(spots[i], i);
+  }
+}
+
+//把資料顯示在畫面上
+function displaySpotData(spot, index) {
+  //獲取文字及圖片網址
+  const spotTitle = spot.stitle;
+  const image = getImageURL(spot);
+
+  //創建 Promotion Item
   const promotionEL = document.createElement("div");
   const pImageEL = document.createElement("div");
   const pTextEL = document.createElement("p");
@@ -120,122 +67,81 @@ function createPromoItem() {
   pImageEL.className = "p-img-container";
   promotionEL.appendChild(pImageEL);
   promotionEL.appendChild(pTextEL);
-  return promotionEL;
-}
 
-//創建 Title Item
-function createTitleItem() {
+
+  //創建 Title Item
   const titleEL = document.createElement("div");
   const starEL = document.createElement("i");
   const textEL = document.createElement("p");
-  titleEL.className = "title-item animated-bg";
+  titleEL.className = "title-item";
   starEL.className = "fa-solid fa-star";
   textEL.className = "text";
   titleEL.appendChild(starEL);
   titleEL.appendChild(textEL);
-  return titleEL;
-}
 
-//顯示Item
-function displayItems(spotsData) {
-
-  spotsData.forEach((spot, index) => {
-    //獲取文字及圖片網址
-    const spotTitle = spot.stitle;
-    const image = getImageURL(spot);
-
-    //創建 Promotion Item
-    const promotionItem = createPromoItem();
+  //前三筆資料輸出至 Promotion Item
+  if (index < 3) {
     
-    //將前三筆資料輸出至Promotion Item
-    if (currentIndex + index < 3) {
-      const pImage = promotionItem.children[0];
-      const pText = promotionItem.children[1];
+    pImageEL.style.backgroundImage = `url(${image})`;
+    pTextEL.textContent = spotTitle;
 
-      pImage.style.backgroundImage = `url(${image})`;
-      pText.textContent = spotTitle;
-
-      //處理RWD情況
-      //promotion item3有加個別class
-      if (index === 2) {
-        promotionItem.classList.add("item3");
-      }
-      //放進DOM
-      cotentContainer.appendChild(promotionItem);
+    //處理RWD情況
+    if (index === 2) {
+      promotionEL.classList.add("item3");
     }
+    cotentContainer.appendChild(promotionEL);
 
     //剩下的資料輸出至Title Item
-    else {  
-      //創建 Title Item
-      const titleItem = createTitleItem();
-      
-      const titleText = titleItem.children[1];
-      titleItem.style.backgroundImage = `url(${image})`;
-      titleText.textContent = spotTitle;
+  } else {
+    
+    titleEL.style.backgroundImage = `url(${image})`;
+    textEL.textContent = spotTitle;
 
-      //處理RWD情況
-      //title item1, title item6, title item9, title item10有加個別的class
-      //===因為有加上前三個promotion item，所以index要特別計算
-      //===currentIndex 是目前已載入的項目數, 
-      //===index 是當前項目在本次載入的項目中的索引, 
-      //===3 是初始的promoItem數量。
-      const relativeIndex = (currentIndex + index - 3) % 10;
-      
-      if (screenWidth >= 1200) {
-        if (relativeIndex % 10 === 0) {
-          titleItem.classList.add("item1");
-        } else if (relativeIndex % 10 === 5) {
-          titleItem.classList.add("item6");
-        } else if (relativeIndex % 10 === 8) {
-          titleItem.classList.add("item9");
-        } else if (relativeIndex % 10 === 9) {
-          titleItem.classList.add("item10");
-        }
-      }
-      //放進DOM
-      cotentContainer.appendChild(titleItem);
-    }
-  });
+    //RWD處理
+    const relativeIndex = index - 3;
+    if (screenWidth >= 1200){
+      if (relativeIndex % 10 === 0) {
+        titleEL.classList.add("item1");
+      } else if (relativeIndex % 10 === 5) {
+        titleEL.classList.add("item6");
+      } 
+    } 
+    
+    cotentContainer.appendChild(titleEL);
+  }
 }
 
-//載入初始項目
-async function startPage() {
-
-  //如果螢幕小於 1200px 的情況
-  if (screenWidth < 1200) {
-    try {
-      //fetch最開始的13筆資料
-      const data = await fetchData(0, initalItemCount + 2);
-      if (data) {
-        cotentContainer.innerHTML = "";
-        displayItems(data);
-        currentIndex = initalItemCount;//更新目前頁面item數量
-      }
-    } catch (error) {
-        console.log(error);
-    }
-  }
-  else {
-    try {
-      //fetch最開始的13筆資料
-      const data = await fetchData(0, initalItemCount);
-      if (data) {
-        displayItems(data);
-        currentIndex = initalItemCount;//更新目前頁面item數量
-      }
-    } catch (error) {
-        console.log(error);
-    }
+function loadMoreData() {
+  const container = document.querySelector(".container");
+  const containerWidth = container.clientWidth;
+  
+  // 計算每列可以容納的項目數量
+  const itemsPerRow = containerWidth < 1200 ? 4 : 6;
+  
+  // 計算剩餘的資料數量
+  const remainingItems = spots.length - currentItem;
+  
+  // 計算要加載的資料數量（兩行）
+  const itemsToLoad = Math.min(itemsPerRow * 2, remainingItems);
+  
+  // 加載資料
+  for (let i = 0; i < itemsToLoad; i++) {
+    displaySpotData(spots[currentItem + i], currentItem + i);
   }
   
-};
+  // 更新 currentItem
+  currentItem += itemsToLoad;
+  
+  if (currentItem >= spots.length) {
+    loadMoreBtn.classList.add("disable");
+  }
+}
 
-startPage();
-//Load more Button
-loadMoreBtn.addEventListener('click', loadMoreItmes);
-//監控螢幕尺寸變化
-window.addEventListener('resize', loadMoreInSmallScreen);
-//PopUp Menu for Mobile Device
+
+getData();
+loadMoreBtn.addEventListener("click", loadMoreData);
+
+// PopUp Menu for Mobile Device
 hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("open");
   mobileNav.classList.toggle("open");
