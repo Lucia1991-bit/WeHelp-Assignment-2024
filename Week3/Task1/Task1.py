@@ -68,22 +68,18 @@ def output_sopt_csv(spots, mrts):
         # 檢查整理好的資料
         for spot in new_data:
 
-            # 取得SpotTitle
+            # 取得景點名稱
             spot_title = spot["stitle"]
-            # print(spot_title)
             # 取得區域
             district = spot["district"]
-            # print(district)
             # 取得經度
             longitude = spot["longitude"]
-            # print(longitude)
             # 取得緯度
             latitude = spot["latitude"]
-            # print(latitude)
             # 取得第一張圖片網址
             # [" ", "去掉https://後的第一個網址", ...]
             image_url = "https://" + spot["filelist"].split('https://')[1]
-            # print(image_url)
+
             writer.writerow([spot_title, district,
                             longitude, latitude, image_url])
 
@@ -103,7 +99,7 @@ def group_spots_by_mrt(data):
     return mrt_group
 
 
-# 輸出mrt.csv
+# ＃ 輸出mrt.csv
 def output_mrt_csv(spots, mrts):
     with open("mrt.csv", "w", encoding="utf-8", newline="") as file:
         # 合併整理兩筆資料
@@ -112,9 +108,8 @@ def output_mrt_csv(spots, mrts):
         mrt_and_spots = group_spots_by_mrt(new_data)
 
         # 欄位名稱
-        # 需將景點個別分開
-
-        # 找出最長的景點陣列
+        # 需將每個景點個別分開
+        # ===找出最長的景點陣列
         max_sopts = max(len(spot) for spot in mrt_and_spots.values())
 
         # 欄位名稱
@@ -128,6 +123,7 @@ def output_mrt_csv(spots, mrts):
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for mrt, spots in mrt_and_spots.items():
+            # 創建新字典
             row = {'捷運站': mrt}
             for i, spot in enumerate(spots):
                 row[f"景点{chinese_num[i]}"] = spot
