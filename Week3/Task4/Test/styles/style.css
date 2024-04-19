@@ -91,6 +91,18 @@ main .container {
   gap: 20px;
 }
 
+/* JS動態生成另外添加的class */
+main .container.rwd-container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: row;
+}
+
+main .container.rwd-container .title-item.span1 {
+  grid-column: span 1;
+}
+
+
 /* Promotion Item */
 main .container .promotion-item {
   grid-column: span 2;
@@ -196,7 +208,8 @@ main .container .title-item .text {
     width: 90%;
     margin: 50px auto;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 50px) repeat(3, 200px);
+    grid-template-rows: repeat(2, 50px);
+    grid-auto-flow: row;
     gap: 20px;
   }
 
@@ -216,8 +229,8 @@ main .container .title-item .text {
     grid-column: span 2;
   }
 
-  .span1 {
-    grid-column: span 1;
+  main .container.rwd-container .title-item.span1 {
+  grid-column: span 1;
   }
 }
 
