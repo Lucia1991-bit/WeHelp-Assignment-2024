@@ -10,6 +10,7 @@ body {
   background-color: #92a8ad;
   color: #555;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* Navbar */
@@ -85,9 +86,22 @@ main .container {
   display: grid;
   width: 1200px;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: 50px auto; /* 高度部分剩下的資料必須自動 */
+  grid-template-rows: 50px; /* 高度部分剩下的資料必須自動 */
+  grid-auto-rows: 200px;
   gap: 20px;
 }
+
+/* JS動態生成另外添加的class */
+main .container.rwd-container {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: row;
+}
+
+main .container.rwd-container .title-item.span1 {
+  grid-column: span 1;
+}
+
 
 /* Promotion Item */
 main .container .promotion-item {
@@ -99,6 +113,7 @@ main .container .promotion-item {
   border-radius: 5px;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   border: #bcc1c4 0.5px solid;
+  overflow: hidden;
 }
 
 main .container .promotion-item p {
@@ -111,15 +126,23 @@ main .container .promotion-item p {
 main .container .promotion-item .p-img-container {
   width: 80px;
   height: 50px;
-  background: url("../img/promotion.svg") no-repeat center center/cover;
+  /* background: url("../img/promotion.svg") no-repeat center center/cover; */
   overflow: hidden;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  z-index: 0;
+}
+
+.pImg {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
 /* Title Item */
 main .container .title-item {
-  background: url("../img/titleItem.jpg") no-repeat center center/cover;
+  /* background: url("../img/titleItem.jpg") no-repeat center center/cover; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -130,15 +153,28 @@ main .container .title-item {
   border: #bcc1c4 0.5px solid;
   overflow: hidden;
   min-width: none;
-  min-height: 200px; 
+  z-index: 2;
 }
 
-/* background loading animation */
-.title-item::after .animated-bg {
-  content: "";
-  width: 100%;
+.titleImg-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.titleImg {
+  object-fit: cover;
   height: 100%;
-  background-color: linear-gradient(
+  width: 100%;
+}
+
+div.title-item.item1,
+div.title-item.item6 {
+  grid-column: span 2;
+}
+
+/* Loading Animation */
+.animated-bg {
+  background-image: linear-gradient(
     to right,
     #f6f7f8 0%,
     #edeef1 10%,
@@ -147,10 +183,17 @@ main .container .title-item {
   );
   background-size: 200% 100%;
   animation: bgPos 1s linear infinite;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
+  opacity: 1;
+  z-index: -10;
+  
+}
+
+.animated-bg-text {
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0;
+  height: 10px;
+  width: 100%;
 }
 
 @keyframes bgPos {
@@ -163,11 +206,6 @@ main .container .title-item {
   }
 }
 
-div.title-item.item1,
-div.title-item.item6 {
-  grid-column: span 2;
-}
-
 /* Star */
 main .container .title-item i.fa-solid {
   font-size: 20px;
@@ -175,6 +213,7 @@ main .container .title-item i.fa-solid {
   top: 10px;
   right: 10px;
   color: rgba(179, 179, 179, 0.9);
+  z-index: 2;
 }
 
 /* Title Text */
@@ -186,6 +225,8 @@ main .container .title-item .text {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  z-index: 2;
+  position: absolute;
 }
 
 /* Button */
@@ -224,7 +265,8 @@ main .container .title-item .text {
     width: 90%;
     margin: 50px auto;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 50px) repeat(3, 200px);
+    grid-template-rows: repeat(2, 50px);
+    grid-auto-rows: 230px;
     gap: 20px;
   }
 
@@ -243,7 +285,13 @@ main .container .title-item .text {
   main .container .title-item.item10 {
     grid-column: span 2;
   }
+
+  main .container.rwd-container .title-item.span1 {
+  grid-column: span 1;
+  }
 }
+
+
 
 /* for  Screen smaller than 600px */
 @media (max-width: 600px) {

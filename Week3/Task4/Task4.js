@@ -83,11 +83,20 @@ function getImageURL(spot) {
 //創建 Promotion Item
 function createPromoItem() {
   const promotionEL = document.createElement("div");
-  const pImageEL = document.createElement("div");
+  const pImageConEL = document.createElement("div");
+  const pImageEL = document.createElement("img");
   const pTextEL = document.createElement("p");
-  promotionEL.className = "promotion-item";
-  pImageEL.className = "p-img-container";
-  promotionEL.appendChild(pImageEL);
+  const pAnimationContent = document.createElement("span"); //for Loading Animation
+
+  pImageEL.className = "pImg";
+  pAnimationContent.textContent = "&nbsp;";
+  promotionEL.className = "promotion-item ";
+  pImageConEL.className = "p-img-container animated-bg";
+  
+  
+  pTextEL.appendChild(pAnimationContent);
+  pImageConEL.appendChild(pImageEL);
+  promotionEL.appendChild(pImageConEL);
   promotionEL.appendChild(pTextEL);
   return promotionEL;
 }
@@ -95,13 +104,22 @@ function createPromoItem() {
 //創建 Title Item
 function createTitleItem() {
   const titleEL = document.createElement("div");
+  const imgCon = document.createElement("div");
+  const imgEL = document.createElement("img");
   const starEL = document.createElement("i");
   const textEL = document.createElement("p");
+
+  imgCon.className = "titleImg-container";
+  imgEL.className = "titleImg"
   titleEL.className = "title-item animated-bg";
   starEL.className = "fa-solid fa-star";
   textEL.className = "text";
+
+  imgCon.appendChild(imgEL);
+  titleEL.appendChild(imgCon);
   titleEL.appendChild(starEL);
   titleEL.appendChild(textEL);
+  console.log(titleEL);
   return titleEL;
 }
 
@@ -118,10 +136,10 @@ function displayItems(spotsData) {
     
     //將前三筆資料輸出至Promotion Item
     if (currentIndex + index < 3) {
-      const pImage = promotionItem.children[0];
+      const pImageCon = promotionItem.children[0];
+      const pImage = pImageCon.children[0];
       const pText = promotionItem.children[1];
-
-      pImage.style.backgroundImage = `url(${image})`;
+      pImage.setAttribute("src", image);
       pText.textContent = spotTitle;
 
       //處理RWD情況
@@ -137,11 +155,14 @@ function displayItems(spotsData) {
     else {  
       //創建 Title Item
       const titleItem = createTitleItem();
-      
-      const titleText = titleItem.children[1];
-      titleItem.style.backgroundImage = `url(${image})`;
+      const imageCon = titleItem.children[0];
+      const imageItem = imageCon.children[0];
+      const titleText = titleItem.children[2];
+      imageItem.setAttribute("src", image);
       titleText.textContent = spotTitle;
 
+
+      
       //處理RWD情況
       //title item1, title item6, title item9, title item10有加個別的class
       //===因為有加上前三個promotion item，所以index要特別計算
