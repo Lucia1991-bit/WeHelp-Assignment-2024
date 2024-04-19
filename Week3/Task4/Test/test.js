@@ -164,10 +164,10 @@ function loadMoreItmes() {
   let itemsToLoad;
   if (screenWidth < 1200) {
     if (isFirstClick) {
-      itemsToLoad = Math.min(6, remainingItems);
+      itemsToLoad = Math.min(14, remainingItems);
       isFirstClick = false; // 將 isFirstClick 設為 false,表示已經不是第一次點擊了
     } else {
-      itemsToLoad = Math.min(8, remainingItems);
+      itemsToLoad = Math.min(12, remainingItems);
     }
   } else {
     itemsToLoad = Math.min(10, remainingItems);
@@ -198,12 +198,12 @@ loadMoreBtn.addEventListener('click', loadMoreItmes);
 //螢幕縮放時會套用RWD
 window.addEventListener('resize', handleRWD_AfterLoad);
 
-// window.addEventListener('resize', function() {
-//   if (screenWidth >= 1200) {
-//     isFirstClick = true;
-//   }
-//   handleRWD_AfterLoad();
-// });
+window.addEventListener('resize', function() {
+  if (screenWidth >= 1200) {
+    isFirstClick = true;
+  }
+  handleRWD_AfterLoad();
+});
 
 
 
