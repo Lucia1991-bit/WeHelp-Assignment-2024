@@ -28,8 +28,7 @@ async function loadMoreItmes() {
         if (currentIndex >= totalItems) {
           loadMoreBtn.classList.add("disable");
         }
-      }
-      
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -50,9 +49,7 @@ async function fetchData(startIndex, endIndex) {
     //觀察資料後，找出需要的資料在["results"]這個key裡面
     const { data: { results } } = await response.json();
     totalItems = results.length; // 更新總項目數
-    console.log(results);
-    
-    
+  
     // const spots = [];
     // for (let i = startIndex; i < endIndex; i++) {
     //   if (i >= totalItems) {
@@ -141,12 +138,7 @@ function displayItems(spotsData) {
       const pText = promotionItem.children[1];
       pImage.setAttribute("src", image);
       pText.textContent = spotTitle;
-
-      //處理RWD情況
-      //promotion item3有加個別class
-      if (index === 2) {
-        promotionItem.classList.add("item3");
-      }
+      
       //放進DOM
       cotentContainer.appendChild(promotionItem);
     }
@@ -160,27 +152,6 @@ function displayItems(spotsData) {
       const titleText = titleItem.children[2];
       imageItem.setAttribute("src", image);
       titleText.textContent = spotTitle;
-
-
-      
-      //處理RWD情況
-      //title item1, title item6, title item9, title item10有加個別的class
-      //===因為有加上前三個promotion item，所以index要特別計算
-      //===currentIndex 是目前已載入的項目數, 
-      //===index 是當前項目在本次載入的項目中的索引, 
-      //===3 是初始的promoItem數量。
-      const relativeIndex = (currentIndex + index - 3) % 10;
-      
-
-      if (relativeIndex % 10 === 0) {
-        titleItem.classList.add("item1");
-      } else if (relativeIndex % 10 === 5) {
-        titleItem.classList.add("item6");
-      } else if (relativeIndex % 10 === 8) {
-        titleItem.classList.add("item9");
-      } else if (relativeIndex % 10 === 9) {
-        titleItem.classList.add("item10");
-      }
 
       //放進DOM
       cotentContainer.appendChild(titleItem);

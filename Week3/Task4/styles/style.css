@@ -167,8 +167,8 @@ main .container .title-item {
   width: 100%;
 }
 
-div.title-item.item1,
-div.title-item.item6 {
+div.title-item:nth-child(10n + 9),
+div.title-item:nth-child(10n + 4) {
   grid-column: span 2;
 }
 
@@ -271,18 +271,19 @@ main .container .title-item .text {
   }
 
   /* Promotion Item  */
-  main .container .promotion-item.item3 {
+  main .container .promotion-item:nth-child(3) {
     grid-column: 1 / span 4;
   }
 
   /* Title Item  */
-  main .container .title-item.item1,
-  main .container .title-item.item6 {
+  div.title-item:nth-child(10n + 9),
+  div.title-item:nth-child(10n + 4),
+  .span1 {
     grid-column: span 1;
   }
 
-  main .container .title-item.item9,
-  main .container .title-item.item10 {
+  main .container .title-item:nth-child(10n + 2),
+  main .container .title-item:nth-child(10n + 3) {
     grid-column: span 2;
   }
 
