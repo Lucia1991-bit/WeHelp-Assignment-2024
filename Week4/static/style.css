@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+
+* {
+ box-sizing: border-box; 
+}
+
+:root {
+  --primaryColor: #918fc3;
+  --color: #9c70ad;
+  --light: #fbf9ff;
+}
+
+body {
+  background: linear-gradient(75deg, rgba(119,197,183,1) 0%, rgba(130,108,173,1) 100%) no-repeat center center/cover;
+  color: #fff;
+  font-family: "Mulish", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.container {
+  background-color: rgba(246, 240, 255, 0.4);
+  padding: 5px 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  border: #fff 1px solid;
+  max-width: 500px;
+  margin:50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+
+}
+
+.container h1 {
+  margin-top: 0;
+  font-size: 3.5rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.container p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.tilte-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.tilte-content i {
+  font-size: 50px;
+  color: #41B06E;
+}
+
+.tilte-content .fa-circle-exclamation {
+  color: #BF3131;
+}
+
+.tilte-content p {
+  margin: 0;
+  min-width: 400px;
+}
+
+
+form {
+  width: 100%;
+}
+
+.form-control {
+  position: relative;
+  margin: 10px 0 30px;
+  width: 100%;
+  
+}
+
+.form-control i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  color: var(--primaryColor);
+}
+
+.form-control input {
+  background-color: var(--light);
+  border: 0;
+  width: 100%;
+  display: block;
+  padding: 15px 15px;
+  font-size: 18px;
+  border-radius: 30px;
+
+}
+
+.form-control input::placeholder {
+  color: #999;
+  font-family: "Mulish", sans-serif;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+}
+
+.content {
+  text-align: center;
+}
+
+.content label {
+  font-size: 18px;
+}
+
+.content span {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--primaryColor);
+}
+
+.button-field {
+  width: 100%;
+}
+
+.button-field2 {
+  width: 50%;
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  padding: 15px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  border: 0;
+  border-radius: 30px;
+  margin: 30px 0;
+  background-color: var(--color);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* square section */
+.circle {
+  width: 80px;
+  height: 80px;
+  border: #fff solid 2px;
+  position: relative;
+  border-radius: 50%;
+  margin: 20px 0;
+}
+
+.circle .fa-calculator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:#fff;
+}
+
+.line {
+  height: 1px;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+#calculate {
+  margin-top: 0;
+}
+
+.forSquare {
+  padding: 10px 20px 50px;
+}
+
+p.result {
+  font-size: 20px;
+  color: var(--color);
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 30px;
+    width: 85%;
+    padding: 5px 30px;
+  }
+}
