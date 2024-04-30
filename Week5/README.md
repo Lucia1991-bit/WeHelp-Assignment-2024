@@ -140,16 +140,17 @@ SELECT AVG(follower_count) AS 'average followers' FROM member;
 
 4. 將 member 資料表按照 follower_count 遞減排序，取得前 2 名的資料，並計算其 follower_count 的平均值：
 ```sql
-CREATE VIEW top_two_follower_count AS
-SELECT follower_count
-FROM member
-ORDER BY follower_count DESC
-LIMIT 2;
+/*使用 Subquery，將動作以一個指令完成*/
 
 SELECT AVG(follower_count) AS 'average of top two followers'
-FROM top_two_follower_count;
+FROM (
+    SELECT follower_count
+    FROM member
+    ORDER BY follower_count DESC
+    LIMIT 2
+);
 ```
-![ScreenShot16](./image/截圖%202024-04-30%20下午6.02.41.png "截圖16")
+![ScreenShot16](./image/截圖%202024-04-30%20晚上9.56.38.png "截圖16")
 
 <br>
 
