@@ -118,7 +118,7 @@ WHERE username = 'test';
 ```sql
 SELECT COUNT(*) AS 'total members' FROM member;
 ```
-![ScreenShot12](./image/截圖%202024-04-29%20晚上11.35.16.png "截圖12")
+![ScreenShot12](./image/截圖%202024-04-30%20下午5.59.44.png "截圖12")
 
 <br>
 
@@ -126,7 +126,7 @@ SELECT COUNT(*) AS 'total members' FROM member;
 ```sql
 SELECT SUM(follower_count) AS 'total followers' FROM member;
 ```
-![ScreenShot13](./image/截圖%202024-04-30%20凌晨12.12.35.png "截圖13")
+![ScreenShot13](./image/截圖%202024-04-30%20下午6.00.06.png "截圖13")
 
 <br>
 
@@ -134,7 +134,7 @@ SELECT SUM(follower_count) AS 'total followers' FROM member;
 ```sql
 SELECT AVG(follower_count) AS 'average followers' FROM member;
 ```
-![ScreenShot14](./image/截圖%202024-04-30%20凌晨12.18.38.png "截圖14")
+![ScreenShot14](./image/截圖%202024-04-30%20下午6.00.30.png "截圖14")
 
 <br>
 
@@ -149,8 +149,7 @@ LIMIT 2;
 SELECT AVG(follower_count) AS 'average of top two followers'
 FROM top_two_follower_count;
 ```
-![ScreenShot15](./image/截圖%202024-04-30%20凌晨1.49.58.png "截圖15")
-![ScreenShot16](./image/截圖%202024-04-30%20凌晨1.50.15.png "截圖16")
+![ScreenShot16](./image/截圖%202024-04-30%20下午6.02.41.png "截圖16")
 
 <br>
 
