@@ -46,7 +46,7 @@ VALUE ('Ryan Gosling', 'user3', 'password3', '80');
 INSERT INTO member (name, username, password, follower_count)
 VALUE ('Yokoyama You', 'user4', 'password4', '60');
 ```
-![ScreenShot4](./image/截圖%202024-04-29%20晚上9.39.39.png "截圖4")
+![ScreenShot4](./image/截圖%202024-04-30%20下午5.38.45.png "截圖4")
 
 <br>
 
@@ -54,62 +54,62 @@ VALUE ('Yokoyama You', 'user4', 'password4', '60');
 ```sql
 SELECT * FROM member;
 ```
-![ScreenShot5](./image/截圖%202024-04-29%20晚上9.39.56.png "截圖5")
+![ScreenShot5](./image/截圖%202024-04-30%20下午5.12.13.png "截圖5")
 
 <br>
 
-2. 取得所有在 member 資料表中的會員資料，按照 time 欄位時間由新至舊排列：
+3. 取得所有在 member 資料表中的會員資料，按照 time 欄位時間由新至舊排列：
 ```sql
 SELECT * FROM member
 ORDER BY time DESC; 
 ```
-![ScreenShot6](./image/截圖%202024-04-29%20晚上9.41.54.png "截圖6")
+![ScreenShot6](./image/截圖%202024-04-30%20下午5.14.13.png "截圖6")
 
 <br>
 
-3. 按照欄位 time 時間由新至舊降序排列，取得排名第二至第四筆資料：
+4. 按照欄位 time 時間由新至舊降序排列，取得排名第二至第四筆資料：
 ```sql
 SELECT * FROM member
 ORDER BY time DESC
 LIMIT 3 OFFSET 1;
 ```
-![ScreenShot7](./image/截圖%202024-04-29%20晚上10.30.57.png "截圖7")
+![ScreenShot7](./image/截圖%202024-04-30%20下午5.14.42.png "截圖7")
 
 <br>
 
-4. 取得欄位 username 為 “test” 的資料：
+5. 取得欄位 username 為 “test” 的資料：
 ```sql
 SELECT * FROM member
 WHERE username = 'test';
 ```
-![ScreenShot8](./image/截圖%202024-04-29%20晚上10.37.49.png "截圖8")
+![ScreenShot8](./image/截圖%202024-04-30%20下午5.15.29.png "截圖8")
 
 <br>
 
-5. 取得欄位 name 含有 “es” 的資料：
+6. 取得欄位 name 含有 “es” 的資料：
 ```sql
 SELECT * FROM member
 WHERE name LIKE '%es%'
 ```
-![ScreenShot9](./image/截圖%202024-04-29%20晚上10.46.32.png "截圖9")
+![ScreenShot9](./image/截圖%202024-04-30%20下午5.16.12.png "截圖9")
 
 <br>
 
-6. 取得欄位 username 與欄位 password 同為 “test” 的資料：
+7. 取得欄位 username 與欄位 password 同為 “test” 的資料：
 ```sql
 SELECT * FROM member
 WHERE username = 'test' AND password = 'test';
 ```
-![ScreenShot10](./image/截圖%202024-04-29%20晚上10.50.39.png "截圖10")
+![ScreenShot10](./image/截圖%202024-04-30%20下午5.16.43.png "截圖10")
 
 <br>
 
-7. 找出欄位 username 等於 test 的資料 ，將這筆資料的 name 欄位的值更新為 ”test2“：
+8. 找出欄位 username 等於 test 的資料 ，將這筆資料的 name 欄位的值更新為 ”test2“：
 ```sql
 UPDATE member SET name = 'test2'
 WHERE username = 'test';
 ```
-![ScreenShot11](./image/截圖%202024-04-29%20晚上11.27.40.png "截圖11")
+![ScreenShot11](./image/截圖%202024-04-30%20下午5.17.45.png "截圖11")
 
 <br>
 
@@ -208,6 +208,16 @@ JOIN member m2 ON m1.member_id = m2.id;
 <br>
 
 3. 透過 JOIN 與 member 資料表關聯，取得 message 資料表中欄位對應 username 是 test 的所有留言，結果需包含發送者的姓名：
+>新增兩則 usetname為‘test’的留言
+```sql
+INSERT INTO message (member_id, content, like_count)
+VALUES (1, 'My birthday tomorrow! Beach getaway with family.', 12);
+
+INSERT INTO message (member_id, content, like_count)
+VALUES (1, 'Travel recommendations for next month\'s trip?', 42);
+```
+
+>選取所有 usetname為‘test’的留言
 ```sql
 SELECT 
   m1.id AS 'message id',
@@ -219,21 +229,11 @@ FROM message m1
 JOIN member m2 ON m1.member_id = m2.id
 WHERE m2.username = 'test';
 ```
-![ScreenShot21]( "截圖21")
+![ScreenShot21](./image/截圖%202024-04-30%20下午5.31.17.png "截圖21")
 
 <br>
 
 1. 透過 JOIN 與 member 資料表關聯，取得 message 資料表中欄位對應 username 是 test 的平均按讚數：
-
->新增usetname為‘test’的留言
-```sql
-INSERT INTO message (member_id, content, like_count)
-VALUES (1, 'My birthday tomorrow! Beach getaway with family.', 12);
-
-INSERT INTO message (member_id, content, like_count)
-VALUES (1, 'Travel recommendations for next month\'s trip?', 42);
-```
-![ScreenShot22](./image/截圖%202024-04-30%20下午3.40.51.png "截圖22")
 
 >計算平均按讚數
 ```sql
