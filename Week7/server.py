@@ -131,7 +131,7 @@ async def get_user_info(request: Request):
             "current_name": current_name,
             "current_id": current_id
         }
-        print("成功獲取登入者資料:", data)
+        print("成功獲取登入者資料")
         return JSONResponse(content=data)
     else:
         return RedirectResponse(url="/", status_code=302)
@@ -160,7 +160,7 @@ async def get_message_info(request: Request, db: db_depend):
             data = {
                 "messages": messages
             }
-            print("成功獲取留言資料:", data)
+            print("成功獲取留言資料")
             return JSONResponse(content=data)
 
         except Exception as e:

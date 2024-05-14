@@ -108,6 +108,10 @@ searchNameForm.addEventListener("submit", async (e) => {
 //按search按鈕，下滑出表單
 searchNameBtn.addEventListener("click", () => {
   searchNameField.classList.toggle("show");
+  
+  // 清空之前的搜尋結果
+  textName.textContent = "";
+  textUsername.textContent = "";
 });
 
 
