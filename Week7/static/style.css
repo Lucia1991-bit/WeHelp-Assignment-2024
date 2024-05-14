@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+ box-sizing: border-box; 
+}
+
+:root {
+  --primaryColor: #918fc3;
+  --color: #9c70ad;
+  --light: #fbf9ff;
+}
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background: linear-gradient(75deg, rgba(119,197,183,1) 0%, rgba(130,108,173,1) 100%);
+  background-attachment: fixed;
+  color: #fff;
+  font-family: "Mulish", sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.main-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  background-color: rgba(246, 240, 255, 0.4);
+  padding: 5px 40px;
+  border-radius: 10px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  border: #fff 1px solid;
+  max-width: 500px;
+  margin: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+}
+
+.container h1 {
+  margin-top: 0;
+  font-size: 3.5rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.container p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.title-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.title-content i {
+  font-size: 50px;
+  color: #41B06E;
+}
+
+.title-content .fa-circle-exclamation {
+  color: #BF3131;
+}
+
+.title-content p {
+  margin: 0;
+  min-width: 400px;
+}
+
+form {
+  width: 100%;
+}
+
+.form-control {
+  position: relative;
+  margin: 10px 0 30px;
+  width: 100%;
+}
+
+.container .form-control i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  color: var(--primaryColor);
+}
+
+.form-control input {
+  background-color: var(--light);
+  border: 0;
+  width: 100%;
+  display: block;
+  padding: 15px 15px;
+  font-size: 18px;
+  border-radius: 30px;
+}
+
+.form-control input::placeholder {
+  color: #999;
+  font-family: "Mulish", sans-serif;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+}
+
+.content {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+.content span {
+  cursor: pointer;
+  text-decoration: underline;
+  color: var(--primaryColor);
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.button-field {
+  width: 100%;
+}
+
+.button-field2 {
+  width: 50%;
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  padding: 15px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  border: 0;
+  border-radius: 30px;
+  margin: 30px 0;
+  background-color: var(--color);
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button:focus {
+  outline: 0;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+#login {
+  display: none;
+}
+
+#login.show,
+#signup.show {
+  display: block;
+}
+
+#login.hide,
+#signup.hide {
+  display: none;
+}
+
+/* member page */
+.member-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding-bottom: 50px;
+}
+
+.m-title-content {
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100vw;
+  background-color: var(--light);
+  overflow-x: hidden;
+}
+
+.m-title-content h2 {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: var(--primaryColor);
+  margin-left: 10px;
+  min-width: 500px;
+  text-align: left;
+}
+
+
+.current-name {
+  margin-left: 8px;
+}
+
+.status {
+  color: #41B06E;
+  display: inline-flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.status i {
+  font-size: 17px;
+}
+
+.status p {
+  margin-left: 5px;
+  font-size: 12px;
+  color: #999;
+}
+
+.status.success {
+  color: #41B06E;
+}
+.status.fail {
+   color: #BF3131;
+}
+
+.member-button-field {
+  margin-right: 80px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.member-button-field button {
+  font-family: inherit;
+  background-color: var(--primaryColor);
+  color: #fff;
+  border: 0;
+  padding: 10px;
+  border-radius: 30px;
+  width: 80px;
+  cursor: pointer;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.member-button-field button:hover {
+  background-color: #65629a;
+}
+
+.member-button-field button:active {
+  transform: scale(0.95);
+}
+
+.sign-out-btn {
+  margin-left: 5px;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+}
+
+.sign-out-btn .fa-solid {
+  color: var(--primaryColor);
+  font-size: 1.5rem;
+}
+
+/* 搜尋用戶名 */
+.search-field {
+  position: absolute;
+  width: 400px;
+  margin: 0;
+  padding: 20px 30px 20px;
+  background-color: var(--light);
+  border-top: 1px solid #999;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  right: 0;
+  top: 60px;
+  transform: translateY(-120%);
+  transition: transform 0.3s ease-in-out;
+  pointer-events: none; /*不允許滑鼠事件*/
+}
+
+.search-field.show {
+  transform: translateY(0);
+  pointer-events: auto;  /*允許滑鼠事件*/
+}
+/* .search-field .label {
+  color: #555;
+  align-self: flex-start;
+  padding-left: 10px;
+  margin: 0;
+} */
+
+.search-field p {
+  color: var(--primaryColor);
+  margin-bottom: 0;
+}
+
+p.search-text-name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+p.search-text-username {
+  margin-top: 2px;
+  color: #999;
+}
+
+.search {
+  right: 0;
+  margin: 0;
+  padding: 10px;
+  width: 100%;
+  position: relative;
+}
+
+.search input {
+  background-color: var(--light);
+  border: 0;
+  width: 100%;
+  display: block;
+  padding: 10px;
+  padding-left: 20px;
+  font-size: 15px;
+  border-radius: 30px;
+  border: 2px solid var(--primaryColor);
+}
+
+.search .search-name-btn {
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.search i {
+  color: var(--primaryColor);
+  font-size: 16px;
+}
+
+
+/* 輸入留言區 */
+.message-container {
+  width: 60%;
+  margin-top: 120px;
+  position: absolute;
+  padding: 50px;
+}
+
+input.inputbox {
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  padding-left: 30px;
+  margin-bottom: 60px;
+}
+
+.message.form-control {
+  position: relative;
+}
+
+.message-btn {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 30px;
+  height: 30px; 
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.fa-comment {
+  font-size: 1.6rem;
+  color: var(--primaryColor);
+}
+
+/* 顯示留言區 */
+.message-card {
+  border: 1px solid #fff;
+  padding: 35px;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(246, 240, 255, 0.4);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+
+.img-container {
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  flex-shrink: 0; 
+  border: 1px solid #fff;
+  border-radius: 50%;
+}
+
+.img-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.message {
+  font-size: 1.5rem;
+  width: 100%;
+  word-wrap: break-word;
+  text-align: left;
+  margin-bottom: 10px;
+  color: #555;
+  font-weight: 700;
+}
+
+.arthur {
+  color: #717171;
+  font-weight: 600;
+}
+
+small {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px 20px;
+  color: #fff;
+}
+
+.delete-msg {
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: -40px;
+  transform: translateY(-50%);
+}
+
+.delete-btn {
+  cursor: pointer;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgba(246, 240, 255, 0.4);
+  backdrop-filter: blur(6px);
+  width: 30px;
+  height: 30px; 
+}
+
+.delete-btn:active {
+  transform: scale(0.9);
+}
+
+.fa-xmark {
+  font-size: 1.2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin: 30px;
+    width: 85%;
+    padding: 5px 30px;
+  }
+
+  .message-container {
+    width: 85%;
+    margin: 100px 30px;
+    padding: 30px;
+  }
+}
