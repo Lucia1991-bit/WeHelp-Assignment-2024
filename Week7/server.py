@@ -188,9 +188,11 @@ def get_member_name(request: Request, db: db_depend, username: str = Query(None,
 
     # 轉換資料格式(tuple list 轉成 dict)
     data = {
-        "id": result[0],
-        "name": result[1],
-        "username": result[2]
+        "data": {
+            "id": result[0],
+            "name": result[1],
+            "username": result[2]
+        }
     }
     print("成功獲取會員資料:", data)
     return JSONResponse(content=data)

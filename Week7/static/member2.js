@@ -89,7 +89,8 @@ searchNameForm.addEventListener("submit", async (e) => {
 
   try {
     const data = await getUserName();
-    const { id, name, username } = data;
+    const { id, name, username } = data.data;
+
 
     textName.textContent = name;
     textUsername .textContent = username;
