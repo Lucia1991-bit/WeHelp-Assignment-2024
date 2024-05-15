@@ -195,7 +195,7 @@ def get_member_name(request: Request, db: db_depend, username: str = Query(None,
         }
     }
     print("成功獲取會員資料:", data)
-    return JSONResponse(content=data)
+    return JSONResponse(content=data, headers={"Cache-Control": "no-cache"})
 
 
 class UpdateName(BaseModel):

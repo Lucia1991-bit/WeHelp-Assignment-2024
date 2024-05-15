@@ -66,7 +66,6 @@ async function getCurrentUser() {
 // 根據使用者名稱查詢使用者資訊
 async function getUserName() {
   const query = searchNameInput.value;
-
   try {
     const response = await fetch(`/api/member/?username=${encodeURIComponent(query)}`);
     if (response.status === 404) {
@@ -82,34 +81,33 @@ async function getUserName() {
   }
 }
 
-
-//當搜尋表單提交時觸發搜尋用戶名請求，將結果顯示在 DOM
+// 當搜尋表單提交時觸發搜尋用戶名請求, 將結果顯示在DOM
 searchNameForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  // 清空之前的搜尋結果
+  textName.textContent = "";
+  textUsername.textContent = "";
 
   try {
     const data = await getUserName();
     const { id, name, username } = data.data;
-
-
     textName.textContent = name;
-    textUsername .textContent = username;
-
-    //清除表單裡的內容
+    textUsername.textContent = username;
+    // 清除表單裡的內容
     searchNameInput.value = "";
-    
   } catch (error) {
-    //處理錯誤情況
+    // 處理錯誤情況
     textName.textContent = "User not found";
-    textUsername .textContent = "";
+    textUsername.textContent = "";
   }
-  
 });
 
-//按search按鈕，下滑出表單
+
+
+// 按search按鈕,下滑出表單
 searchNameBtn.addEventListener("click", () => {
   searchNameField.classList.toggle("show");
-  
+
   // 清空之前的搜尋結果
   textName.textContent = "";
   textUsername.textContent = "";
@@ -271,22 +269,6 @@ async function deleteMessage(e) {
     }
   }
 }
-
-// 為搜尋使用者名稱的表單添加提交事件的監聽器
-searchNameForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  try {
-    const data = await getUserName();
-    const { id, name, username } = data;
-
-    textName.textContent = name;
-    textUsername.textContent = username;
-  } catch (error) {
-    textName.textContent = "User not found";
-    textUsername.textContent = "";
-  }
-});
 
 // 為修改使用者名稱的按鈕添加點擊事件的監聽器
 changeNameBtn.addEventListener("click", () => {
